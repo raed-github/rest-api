@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+  service-discovery:
+    image: service-discovery
+    ports:
+      - '8761:8761'
+    expose:
+      - '8761'
+    networks:
+      - rest-container-network
+
+  account-service:
+    image: account-service
+    ports:
+      - '8090:8090'
+    expose:
+      - '8090'
+    networks:
+      - rest-container-network
+    depends_on:
+      - service-discovery
+    
+  customer-service:
+    image: customer-service
+    ports:
+      - '8091:8091'
+    expose:
+      - '8091'
+    networks:
+      - rest-container-network
+    depends_on:
+      - service-discovery
+
+  transaction-service:
+    image: transaction-service
+    ports:
+      - '8092:8092'
+    expose:
+      - '8092'
+    networks:
+      - rest-container-network
+    depends_on:
+      - service-discovery
+
+networks:
+  rest-container-network:
+  

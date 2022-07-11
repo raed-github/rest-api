@@ -2,7 +2,7 @@ version: "3"
 services:
 
   service-discovery:
-    image: service-discovery-0.0.1
+    image: service-discovery
     ports:
       - '8761:8761'
     expose:
@@ -11,7 +11,7 @@ services:
       - rest-container-network
 
   account-service:
-    image: account-service-0.0.1
+    image: account-service
     ports:
       - '8090:8090'
     expose:
@@ -22,7 +22,7 @@ services:
       - service-discovery
     
   customer-service:
-    image: customer-service-0.0.1
+    image: customer-service
     ports:
       - '8091:8091'
     expose:
@@ -33,7 +33,7 @@ services:
       - service-discovery
 
   transaction-service:
-    image: transaction-service-0.0.1
+    image: transaction-service
     ports:
       - '8092:8092'
     expose:

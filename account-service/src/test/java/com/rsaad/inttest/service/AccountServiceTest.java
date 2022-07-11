@@ -63,7 +63,6 @@ public class AccountServiceTest {
 		
 		doNothing().when(transactionClient).createTransaction(transactionDto);
 		
-		
 		transactionClient.createTransaction(transactionDto);
 
 		AccountDto accountDto = accountService.openAccount(openAccountDto);
@@ -74,9 +73,6 @@ public class AccountServiceTest {
 
 	}
 	
-	void givenOpenAccountDto_whenOpenAccount_ReturnCustomerNotFound() {
-		
-	}
 
 
 }

@@ -53,6 +53,7 @@ public class DtoMapper {
 				.dateCreated(sourceAccount.getDateCreated())
 				.dateUpdated(sourceAccount.getDateUpdated())
 				.customerId(sourceAccount.getCustomerId())
+				.accountId(sourceAccount.getId())
 				.build();
 	}
 	

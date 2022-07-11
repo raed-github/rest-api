@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService{
 		.customerId(openAccountDto.getCustomerId())
 		.build();
 
-        accountRepository.save(account);
+		account = accountRepository.save(account);
 
 		if(openAccountDto.getBalance() > 0.0) {
 			TransactionDto transactionDto = TransactionDto.builder()
@@ -54,13 +54,12 @@ public class AccountServiceImpl implements AccountService{
 			.transactionType(AccountConstants.TRANSACTION_TYPE_DEPOSIT).build();
 			
 			account.setBalanace(openAccountDto.getBalance());
-	        accountRepository.save(account);
+			account = accountRepository.save(account);
 	        
 			transactionClient.createTransaction(transactionDto);
-			return DtoMapper.toAccountDto(account);
 		}
 				
-		return AccountDto.builder().build();
+		return DtoMapper.toAccountDto(account);
 	}
 
 	@Override

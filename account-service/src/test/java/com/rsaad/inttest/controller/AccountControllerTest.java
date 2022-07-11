@@ -53,6 +53,4 @@ public class AccountControllerTest {
 		verify(accountService).openAccount(openAccountDto);
 	}
 
-	
-
 }

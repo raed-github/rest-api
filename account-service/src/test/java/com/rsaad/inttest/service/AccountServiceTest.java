@@ -20,7 +20,6 @@ import com.rsaad.dto.TransactionDto;
 import com.rsaad.feign.client.CustomerClient;
 import com.rsaad.feign.client.TransactionClient;
 import com.rsaad.model.Account;
-import com.rsaad.model.Transaction;
 import com.rsaad.repository.AccountRepository;
 import com.rsaad.service.impl.AccountServiceImpl;
 
@@ -72,7 +71,5 @@ public class AccountServiceTest {
 		assertTrue(accountDto.getCustomerId().equals(openAccountDto.getCustomerId()));
 
 	}
-	
-
 
 }

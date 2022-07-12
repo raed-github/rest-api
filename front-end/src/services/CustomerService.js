@@ -17,8 +17,11 @@ class CustomerService {
     }
 
     openAccount(customer){
-        console.log('test')
         return axios.post(ACCOUNT_API_BASE_URL,customer);
+    }
+
+    getCustomerInfo(customerId){
+        return axios.get(CUSTOMER_INFO_API_BASE_URL + '/' + customerId);
     }
 
     getCustomerById(customerId){

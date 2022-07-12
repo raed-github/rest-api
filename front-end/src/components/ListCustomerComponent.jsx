@@ -31,6 +31,10 @@ class ListCustomerComponent extends Component {
         this.props.history.push(`/open-account/${id}`);
     }
 
+    viewCustomerInfo(id){
+        this.props.history.push(`/view-customer-info/${id}`);
+    }
+
     componentDidMount(){
         CustomerService.getCustomers().then((res) => {
             this.setState({ customers: res.data});
@@ -57,6 +61,7 @@ class ListCustomerComponent extends Component {
                                     <th> Customer First Name</th>
                                     <th> Customer Last Name</th>
                                     <th> Actions</th>
+                                    <th> Customer Info</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,6 +76,9 @@ class ListCustomerComponent extends Component {
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.deleteCustomer(customer.customerId)} className="btn btn-danger">Delete </button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.viewCustomer(customer.customerId)} className="btn btn-info">View </button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.openAccount(customer.customerId)} className="btn btn-info"> Open Account </button>
+                                             </td>
+                                             <td>
+                                                <button style={{marginLeft: "10px"}} onClick={ () => this.viewCustomerInfo(customer.customerId)} className="btn btn-info">Customer Info </button>
                                              </td>
                                         </tr>
                                     )

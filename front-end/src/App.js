@@ -8,6 +8,7 @@ import FooterComponent from './components/FooterComponent';
 import CreateCustomerComponent from './components/CreatCustomer';
 import OpenAccountComponent from './components/OpenAccountComponent';
 import ViewCustomerComponent from './components/ViewCustomerComponent';
+import ViewCustomerInfoComponent from './components/ViewCustomerInfoComponent';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                           <Route path = "/add-customer/:id" component = {CreateCustomerComponent}></Route>
                           <Route path = "/view-customer/:id" component = {ViewCustomerComponent}></Route>
                           <Route path = "/open-account/:id" component = {OpenAccountComponent}></Route> 
+                          <Route path = "/view-customer-info/:id" component = {ViewCustomerInfoComponent}></Route>                          
                     </Switch>
                 </div>
               <FooterComponent />

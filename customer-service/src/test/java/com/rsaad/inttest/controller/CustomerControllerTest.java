@@ -139,13 +139,13 @@ public class CustomerControllerTest {
 	}
 	
 	@Test
-	void givenCustomerId_WhenDeleteCustomerById_ThenReturnNoContent() throws Exception {
+	void givenCustomerId_WhenDeleteCustomerById_ThenReturnNoFound() throws Exception {
 		String id = "bc84d4bf-37f1-403f-b276-4b16827feb2f";
 
 		doNothing().when(customerService).deleteCustomer(id);
 		
 		mockMvc.perform(delete("/v1/customers/{id}",id))
-			   .andExpect(status().isNoContent())
+			   .andExpect(status().isNotFound())
 			   .andDo(print());
 	}
 	

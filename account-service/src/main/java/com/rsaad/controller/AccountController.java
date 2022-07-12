@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rsaad.constants.AccountConstants;
 import com.rsaad.dto.AccountDto;
 import com.rsaad.dto.OpenAccountDto;
-import com.rsaad.exception.CustomerNotFoundException;
+import com.rsaad.exception.AccountNotFoundException;
 import com.rsaad.service.AccountService;
 
 @RestController
@@ -42,9 +42,7 @@ public class AccountController {
     public ResponseEntity<List<String>> findCustomerAccounts(@PathVariable("id") String id) {
 		return accountService.findCustomerAccounts(id)
 				.map(ResponseEntity::ok)
-				.orElseGet(()->{
-					throw new CustomerNotFoundException(AccountConstants.ACCOUNT_DOES_NOT_EXIST);
-				});
+				.orElseThrow(AccountNotFoundException::new);
     }
     
     @PutMapping("/accounts/{id}")

@@ -11,8 +11,7 @@ public class TransactionConstants {
 	
 	public final static String TRANSACTION_TYPE_DEPOSIT ="Deposit";
 	public final static String TRANSACTION_TYPE_WITHDRAWL ="Withdrawl";
-	
+	public final static String TRANSACTION_DOES_NOT_EXIST ="Transaction doesnot exist";
 	public final static String TRANSACTION_DELETED = "Transaction successfully deleted!.";
-	
-	
+		
 }

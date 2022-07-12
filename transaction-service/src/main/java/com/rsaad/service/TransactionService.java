@@ -12,7 +12,7 @@ public interface TransactionService {
 	 * @param customerId
 	 * @return
 	 */
-	public List<TransactionDto> customerTransactions(String customerId);
+	public Optional<List<TransactionDto>> customerTransactions(String customerId);
 	public TransactionDto createNewTransaction(TransactionDto transactionDto);
 	public TransactionDto updateTransaction(TransactionDto transactionDto);
 	public void deleteTransaction(String id);

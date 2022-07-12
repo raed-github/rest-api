@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rsaad.constants.TransactionConstants;
 import com.rsaad.dto.TransactionDto;
+import com.rsaad.exception.TransactionNotFoundException;
 import com.rsaad.service.TransactionService;
 
 @RestController
@@ -30,8 +31,8 @@ public class TransactionController {
 
     @GetMapping("/transactions/customer-transactions/{customerId}")
     public ResponseEntity<List<TransactionDto>> findCustomerTransactions(@PathVariable("customerId") String customeerId) {
-    	List<TransactionDto> transactionsDto = transactionService.customerTransactions(customeerId);
-    	return new ResponseEntity<>(transactionsDto,HttpStatus.OK);
+    	return transactionService.customerTransactions(customeerId).map(ResponseEntity::ok)
+    			.orElseThrow(TransactionNotFoundException::new);
     }
 
     @PostMapping("/transactions")
@@ -61,7 +62,7 @@ public class TransactionController {
     public ResponseEntity<TransactionDto> findTransactionById(@PathVariable("id") String id) {
 		return transactionService.findTransactionById(id)
 				.map(ResponseEntity::ok)
-				.orElseGet(()->ResponseEntity.notFound().build());
+				.orElseThrow(TransactionNotFoundException::new);
     }
     
     @DeleteMapping("/transactions/{id}")

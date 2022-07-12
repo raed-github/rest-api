@@ -1,5 +1,6 @@
 package com.rsaad.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,16 +29,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Optional<CustomerInfoDto> getCustomerInfo(String customerId) {
 		Optional<CustomerDto> cutstomerDto = this.findCustomerById(customerId);
-		if(cutstomerDto.isPresent()) {
-			ResponseEntity<List<TransactionDto>> response = transactionClient.findCustomerTransactions(customerId);
-			List<TransactionDto> transactionsDto = response.getBody();			
-			return Optional.of(CustomerInfoDto.builder()
-			.customerId(customerId)
-			.name(cutstomerDto.get().getName())
-			.surName(cutstomerDto.get().getSurName())
-			.transactions(transactionsDto).build());
+		CustomerInfoDto customerInfo= CustomerInfoDto.builder()
+				.customerId(customerId)
+				.name(cutstomerDto.get().getName())
+				.surName(cutstomerDto.get().getSurName()).build();
+		try {
+			if(cutstomerDto.isPresent()) {
+				ResponseEntity<List<TransactionDto>> response = transactionClient.findCustomerTransactions(customerId);
+				List<TransactionDto> transactionsDto = response.getBody();
+				customerInfo.setTransactions(transactionsDto);				
+			}
+		}catch(RuntimeException e) {
+			customerInfo.setTransactions(new ArrayList<>());				
 		}
-		return Optional.empty();
+		return Optional.of(customerInfo);
 	}
 	
 	@Override

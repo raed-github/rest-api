@@ -32,9 +32,7 @@ public class CustomerController {
     public ResponseEntity<CustomerInfoDto> customerInfo(@PathVariable("id") String id) {
 		return customerService.getCustomerInfo(id)
 				.map(ResponseEntity::ok)
-				.orElseGet(()->{
-					throw new CustomerNotFoundException();
-				});
+				.orElseThrow(CustomerNotFoundException::new);
     }
 
     @PostMapping("/customers")

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.rsaad.dto.TransactionDto;
 import com.rsaad.dto.mapper.DtoMapper;
+import com.rsaad.exception.TransactionNotFoundException;
 import com.rsaad.feign.client.AccountClient;
 import com.rsaad.model.Transaction;
 import com.rsaad.repository.TransactionRepository;
@@ -24,21 +25,23 @@ public class TransactionServiceImpl implements TransactionService{
 	@Autowired
 	private AccountClient accountClient;
 
-
 	@Override
-	public List<TransactionDto> customerTransactions(String customerId) {
-		ResponseEntity<List<String>> accountResponse = accountClient.findCustomerAccounts(customerId);
-		List<String> customerAccounts = accountResponse.getBody();	
-		List<TransactionDto> transactionsDto = new ArrayList<TransactionDto>();
-		List<Transaction> customerTransactions = new ArrayList<Transaction>();
-	    for(String id : customerAccounts) {
-	    	List<Transaction> transactions = transactionRepository.findTransactionByAccountId(id);
-	    	if(null != transactions && !transactions.isEmpty()) {
-	    		customerTransactions.addAll(transactions);
-	    	}
-	    	transactionRepository.findAll();
-	    }
-	     return customerTransactions.stream().map(DtoMapper::toTransactionDto).collect(Collectors.toList());
+	public Optional<List<TransactionDto>> customerTransactions(String customerId) {
+		List<Transaction> customerTransactions = null;
+		try {
+			ResponseEntity<List<String>> accountResponse = accountClient.findCustomerAccounts(customerId);
+			List<String> customerAccounts = accountResponse.getBody();
+			customerTransactions = new ArrayList<Transaction>();
+		    for(String id : customerAccounts) {
+		    	List<Transaction> transactions = transactionRepository.findTransactionByAccountId(id);
+		    	if(null != transactions && !transactions.isEmpty()) {
+		    		customerTransactions.addAll(transactions);
+		    	}
+		    }
+		}catch(TransactionNotFoundException e) {
+			return Optional.empty();
+		}
+	    return Optional.of(customerTransactions.stream().map(DtoMapper::toTransactionDto).collect(Collectors.toList()));
 	}
 
 	@Override

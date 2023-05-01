@@ -78,11 +78,11 @@ GET /v1/customers - retrieves all customers
 
 | API Name | HTTP Method | Model URIs | Status code | Description | 
 | --------------- | --------------- | --------------- | --------------- | --------------- |
-| account-service | POST| /v1/transactions | 200 (CREATED)| Creating an account |
-| account-service | PUT | /v1/transactions/{id} | 200 (OK) |Updating account |
-| account-service | GET | /v1/transactions/{id} | 200 (OK) | Fetching one account |
-| account-service | DELETE | /v1/transactions/{id} | 204 (No Content) | Deleting an account |
-| account-service | GET | /v1/transactions/customer-transactions/{customerId}| 200 (OK) | Fetch a customer transactions |
+| transaction-service | POST| /v1/transactions | 200 (CREATED)| Creating an account |
+| transaction-service | PUT | /v1/transactions/{id} | 200 (OK) |Updating account |
+| transaction-service | GET | /v1/transactions/{id} | 200 (OK) | Fetching one account |
+| transaction-service | DELETE | /v1/transactions/{id} | 204 (No Content) | Deleting an account |
+| transaction-service | GET | /v1/transactions/customer-transactions/{customerId}| 200 (OK) | Fetch a customer transactions |
 
 
 JUnit & integration tests coverage.
